@@ -1,4 +1,4 @@
-import { ShoppingBag, Star } from 'lucide-react';
+import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
@@ -6,8 +6,52 @@ import { useLanguage } from '../context/LanguageContext.jsx';
 const price = (value) => `৳ ${Number(value).toLocaleString('en-US')}`;
 
 export default function ProductCard({ product }) {
-  const { addItem } = useCart(); const { language, t } = useLanguage(); const name = language === 'bn' ? product.banglaName || product.name : product.name;
-  function tilt(event) { const element = event.currentTarget; const rect = element.getBoundingClientRect(); const x = (event.clientX - rect.left) / rect.width - .5; const y = (event.clientY - rect.top) / rect.height - .5; element.style.setProperty('--rx', `${-y * 3}deg`); element.style.setProperty('--ry', `${x * 4}deg`); element.style.setProperty('--mx', `${(x + .5) * 100}%`); element.style.setProperty('--my', `${(y + .5) * 100}%`); }
-  const resetTilt = (event) => { event.currentTarget.style.setProperty('--rx', '0deg'); event.currentTarget.style.setProperty('--ry', '0deg'); };
-  return <article className="product-card-3d group relative flex h-full flex-col rounded-[1.25rem] border border-zinc-100 p-3 shadow-[0_8px_20px_rgba(80,60,4,.07)]" onPointerMove={tilt} onPointerLeave={resetTilt}><div className="product-card-light pointer-events-none absolute inset-0 rounded-[1.25rem]" /><Link to={`/product/${product._id}`} className="relative block"><div className="product-image-stage relative aspect-[1/.82] overflow-hidden rounded-[.95rem] bg-[#fff9e7]"><img className="h-full w-full object-cover mix-blend-multiply transition duration-500 group-hover:scale-105" src={product.images?.[0] || 'https://placehold.co/600x520/f0f0f0/333?text=Product'} alt={name} />{product.discount > 0 && <span className="absolute left-2 top-2 rounded-lg bg-zinc-900 px-2 py-1 text-[10px] font-black text-white">-{product.discount}%</span>}</div></Link><div className="relative flex flex-1 flex-col px-1 pb-1 pt-3"><span className="text-[10px] font-bold uppercase tracking-[.12em] text-yellow-700">{product.brand}</span><Link to={`/product/${product._id}`} className="mt-1 min-h-12 line-clamp-2 text-sm font-bold leading-5 text-zinc-800 transition hover:text-yellow-800">{name}</Link><div className="mt-1.5 flex items-center gap-1 text-xs text-yellow-600"><Star size={13} fill="currentColor" /><span>{Number(product.rating?.average || 5).toFixed(1)}</span><span className="text-zinc-400">({product.rating?.count || 0})</span></div><div className="mt-2 flex items-baseline gap-2"><span className="font-bold text-zinc-900">{price(product.price)}</span>{product.originalPrice > product.price && <del className="text-xs text-zinc-400">{price(product.originalPrice)}</del>}</div><button onClick={() => addItem(product)} className="product-add-button mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-sm font-bold"><ShoppingBag size={16} /> {t('addToCart')}</button></div></article>;
+  const { addItem } = useCart();
+  const { language, t } = useLanguage();
+  const name = language === 'bn' ? product.banglaName || product.name : product.name;
+
+  return (
+    <article className="product-card group">
+      {/* Image area */}
+      <Link to={`/product/${product._id}`} className="product-card-image">
+        <img
+          src={product.images?.[0] || 'https://placehold.co/600x600/f3f1f9/666?text=Product'}
+          alt={name}
+        />
+        {product.discount > 0 && (
+          <span className="product-card-discount">-{product.discount}%</span>
+        )}
+        <button
+          type="button"
+          className="product-card-wishlist"
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+          aria-label="Add to wishlist"
+        >
+          <Heart size={16} />
+        </button>
+      </Link>
+
+      {/* Body */}
+      <div className="product-card-body">
+        <span className="product-card-brand">{product.brand}</span>
+        <Link to={`/product/${product._id}`} className="product-card-title">
+          {name}
+        </Link>
+        <div className="product-card-rating">
+          <Star size={14} fill="currentColor" />
+          <span className="font-semibold text-zinc-700">{Number(product.rating?.average || 5).toFixed(1)}</span>
+          <span>({product.rating?.count || 0})</span>
+        </div>
+        <div className="product-card-price">
+          <span className="product-card-price-current">{price(product.price)}</span>
+          {product.originalPrice > product.price && (
+            <span className="product-card-price-original">{price(product.originalPrice)}</span>
+          )}
+        </div>
+        <button onClick={() => addItem(product)} className="product-add-btn">
+          <ShoppingBag size={16} /> {t('addToCart')}
+        </button>
+      </div>
+    </article>
+  );
 }

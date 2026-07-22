@@ -1,19 +1,99 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, CheckCircle2, HeartHandshake, HeartPulse, MessageSquareHeart, PackageCheck, PawPrint, ShieldCheck, Sparkles, Stethoscope } from 'lucide-react';
+import { Check, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
 const slides = [
-  { image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1100&q=85', eyebrowBn: 'সবাইয়ের জন্য বিনামূল্যে সেবা', eyebrowEn: 'FREE CARE FOR EVERY OWNER', titleBn: 'আপনার প্রাণীর জন্য বিনামূল্যে ডাক্তার সেবা।', titleEn: 'Free doctor care for the animals you love.', textBn: 'আবেদন করুন, আমাদের সাপোর্ট টিম আপনার প্রয়োজন বুঝে একজন অভিজ্ঞ পশু চিকিৎসককে চ্যাটে যুক্ত করবেন।', textEn: 'Apply first. Our support team reviews your need and connects an experienced veterinarian in chat.', to: '/consultation', labelBn: 'আবেদন → যাচাই → ডাক্তার চ্যাট', labelEn: 'Apply → review → doctor chat' },
-  { image: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1100&q=85', eyebrowBn: 'এক্সক্লুসিভ ইমপোর্টেড টয়স', eyebrowEn: 'EXCLUSIVE IMPORTED TOYS', titleBn: 'খেলার আনন্দে আরও প্রাণবন্ত প্রতিটি দিন।', titleEn: 'Make every day brighter with play.', textBn: 'নিরাপদ, মানসম্মত এবং বাছাই করা ইমপোর্টেড খেলনা—আপনার পেটের সুস্থ মন ও আনন্দের জন্য।', textEn: 'Safe, quality imported toys chosen to support a happier, more active companion.', to: '/shop?subCategory=toys', labelBn: 'নতুন ইমপোর্টেড টয়স কালেকশন', labelEn: 'New imported toys collection' },
-  { image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1100&q=85', eyebrowBn: 'খাবার থেকে কেয়ার, সব এক জায়গায়', eyebrowEn: 'EVERYDAY PET ESSENTIALS', titleBn: 'যা দরকার, ঠিক তা-ই সহজে খুঁজে নিন।', titleEn: 'Find exactly what they need, simply.', textBn: 'খাবার, মেডিসিন, সাপ্লিমেন্ট, টয়স ও এক্সেসরিজ—পরিষ্কার ক্যাটাগরিতে সাজানো।', textEn: 'Food, medicine, supplements, toys and accessories—clearly organised in one place.', to: '/shop', labelBn: 'সহজে পছন্দ করুন, নিশ্চিন্তে অর্ডার করুন', labelEn: 'Choose easily, order confidently' }
+  {
+    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80',
+    titleBn: 'আপনার পোষা প্রাণীর\nসুস্থতাই আমাদের লক্ষ্য',
+    titleEn: 'Your pet\'s wellness\nis our mission',
+    subtitleBn: 'প্রিমিয়াম পেট ফুড, ভেটেরিনারি সেবা ও যত্নের সবকিছু এক জায়গায়।',
+    subtitleEn: 'Premium pet food, veterinary service & care essentials all in one place.',
+    to: '/shop'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80',
+    titleBn: 'বিশ্বস্ত ব্র্যান্ডের\nপ্রিমিয়াম পেট ফুড',
+    titleEn: 'Premium pet food\nfrom trusted brands',
+    subtitleBn: 'Royal Canin, Whiskas, Me-O সহ সেরা ব্র্যান্ডের পণ্য।',
+    subtitleEn: 'Products from top brands including Royal Canin, Whiskas, Me-O.',
+    to: '/shop?subCategory=food'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80',
+    titleBn: 'বিনামূল্যে পশু\nচিকিৎসা পরামর্শ',
+    titleEn: 'Free veterinary\nconsultation',
+    subtitleBn: 'অভিজ্ঞ পশু চিকিৎসকের কাছ থেকে বিনামূল্যে পরামর্শ নিন।',
+    subtitleEn: 'Get free advice from experienced veterinarians.',
+    to: '/consultation'
+  }
 ];
 
 export default function HeroBanner() {
-  const [active, setActive] = useState(0); const { language, t } = useLanguage();
-  useEffect(() => { const timer = setInterval(() => setActive((current) => (current + 1) % slides.length), 5500); return () => clearInterval(timer); }, []);
-  const slide = slides[active]; const title = language === 'bn' ? slide.titleBn : slide.titleEn; const text = language === 'bn' ? slide.textBn : slide.textEn; const eyebrow = language === 'bn' ? slide.eyebrowBn : slide.eyebrowEn;
-  return <section className="hero-world relative overflow-hidden"><div className="hero-grid absolute inset-0 opacity-50" /><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="page-container relative z-10 grid min-h-[560px] items-center gap-8 py-12 lg:grid-cols-[1.05fr_.95fr] lg:py-14"><div className="max-w-2xl"><div className="flex flex-wrap items-center gap-2"><div className="hero-chip"><Sparkles size={14} className="text-pink-500" fill="currentColor" />{eyebrow}</div><Link to="/consultation" className="free-care-pill"><MessageSquareHeart size={14} />{language === 'bn' ? '১০০% বিনামূল্যে' : '100% free'}</Link></div><div className="hero-free-service"><span><HeartPulse size={26} /></span><p>{language === 'bn' ? 'আপনার পশুর জন্য ফ্রি কনসালটেশন' : 'Free consultation for your animal'}</p></div><h1 className="mt-4 max-w-xl text-4xl font-black leading-[1.05] tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl">{title}</h1><p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">{text}</p><div className="mt-8 flex flex-wrap gap-3"><Link className="hero-cta" to={slide.to}>{slide.to === '/consultation' ? (language === 'bn' ? 'বুক নাউ' : 'Book now') : t('shopNow')} <ArrowRight size={18} /></Link><Link className="hero-ghost" to="/consultation"><Stethoscope size={18} />{language === 'bn' ? 'ফ্রি কনসালটেশন' : 'Free consultation'}</Link></div><div className="mt-9 flex flex-wrap gap-x-5 gap-y-3 text-xs font-semibold text-zinc-600">{[[ShieldCheck, language === 'bn' ? 'বিশ্বস্ত ভেট টিম' : 'Trusted vet team'], [PackageCheck, language === 'bn' ? 'বাছাই করা পণ্য' : 'Curated products'], [HeartHandshake, language === 'bn' ? 'মন ভালো করা কেয়ার' : 'Care that feels good']].map(([Icon, item]) => <span className="flex items-center gap-1.5" key={item}><Icon size={15} className="text-violet-600" />{item}</span>)}</div></div><HeroScene slide={slide} language={language} /><div className="absolute bottom-7 left-1/2 flex -translate-x-1/2 gap-2 lg:left-auto lg:right-0 lg:translate-x-0">{slides.map((_item, index) => <button key={index} onClick={() => setActive(index)} className={`h-2.5 rounded-full transition-all ${index === active ? 'w-9 bg-violet-600' : 'w-2.5 bg-violet-200 hover:bg-violet-300'}`} aria-label={`Slide ${index + 1}`} />)}</div></div></section>;
-}
+  const [active, setActive] = useState(0);
+  const { language } = useLanguage();
 
-function HeroScene({ slide, language }) { return <div className="hero-stage mx-auto w-full max-w-lg"><div className="hero-orbit hero-orbit-1"><span>●</span><span>●</span></div><div className="hero-orbit hero-orbit-2"><span>+</span><span>+</span></div><div className="hero-platform hero-platform-shadow" /><div className="hero-platform hero-platform-top" /><div className="hero-photo-frame"><img src={slide.image} alt="Animal care and pet products" /><span className="hero-photo-label">{language === 'bn' ? slide.labelBn : slide.labelEn}</span></div><div className="hero-food-pack"><PawPrint size={32} /><span className="mt-1 text-[10px] font-black tracking-[.2em] text-violet-900">NEXGEN</span><span className="text-[8px] font-bold text-violet-700">CARE CLUB</span></div><div className="hero-float-card hero-float-card-top"><span className="grid h-8 w-8 place-items-center rounded-lg bg-pink-100 text-pink-600"><HeartPulse size={16} /></span><span><b>{language === 'bn' ? 'ফ্রি ডাক্তার সেবা' : 'Free doctor service'}</b><small>{language === 'bn' ? 'আবেদনের পর চ্যাটে সংযোগ' : 'Matched in chat after applying'}</small></span></div><div className="hero-float-card hero-float-card-bottom"><span className="grid h-8 w-8 place-items-center rounded-lg bg-violet-100 text-violet-600"><CheckCircle2 size={16} /></span><span><b>{language === 'bn' ? 'বাছাই করা পণ্য' : 'Curated products'}</b><small>{language === 'bn' ? 'প্রতিদিনের প্রয়োজন সহজে' : 'Everyday essentials, simplified'}</small></span></div></div>; }
+  useEffect(() => {
+    const timer = setInterval(() => setActive((current) => (current + 1) % slides.length), 5500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = slides[active];
+  const title = language === 'bn' ? slide.titleBn : slide.titleEn;
+  const subtitle = language === 'bn' ? slide.subtitleBn : slide.subtitleEn;
+
+  return (
+    <section className="hero-banner">
+      <div className="page-container relative z-10 grid min-h-[420px] items-center gap-8 py-10 lg:grid-cols-2 lg:py-14">
+        {/* Left side */}
+        <div className="max-w-xl">
+          <h1 className="text-4xl font-black leading-tight text-zinc-900 sm:text-5xl whitespace-pre-line">
+            {title}
+          </h1>
+          <p className="mt-4 text-base text-zinc-600 leading-relaxed">
+            {subtitle}
+          </p>
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+            <div className="hero-check">
+              <Check size={16} />
+              {language === 'bn' ? '১০০% অরিজিনাল পণ্য' : '100% Original products'}
+            </div>
+            <div className="hero-check">
+              <Check size={16} />
+              {language === 'bn' ? 'বিশেষজ্ঞ পেট সাপোর্ট' : 'Expert pet support'}
+            </div>
+            <div className="hero-check">
+              <Check size={16} />
+              {language === 'bn' ? 'দ্রুত ও নিরাপদ ডেলিভারি' : 'Fast & safe delivery'}
+            </div>
+          </div>
+          <Link to={slide.to} className="hero-cta mt-8">
+            {language === 'bn' ? 'এখনই শপ করুন' : 'Shop now'} <ArrowRight size={18} />
+          </Link>
+        </div>
+        {/* Right side */}
+        <div className="relative">
+          <img src={slide.image} alt="Hero image" className="rounded-3xl shadow-hero w-full object-cover max-h-[380px]" />
+          {/* Discount badge */}
+          <div className="hero-badge">
+            <span className="text-[10px] tracking-wide">UP TO</span>
+            <span className="text-2xl leading-none">25%</span>
+            <span className="text-[10px]">OFF</span>
+          </div>
+        </div>
+        {/* Dots at bottom center */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hero-dots">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActive(index)}
+              className={`hero-dot ${index === active ? 'hero-dot-active' : 'hero-dot-inactive'}`}
+              aria-label={`Slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
