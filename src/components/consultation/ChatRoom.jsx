@@ -38,15 +38,15 @@ export default function ChatRoom({ consultation, messages, sending, peerTyping, 
   return (
     <div className="mx-auto flex h-[70vh] max-w-3xl flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-card">
       {/* Doctor / support header */}
-      <div className="flex items-center justify-between gap-3 bg-green-900 px-5 py-4 text-white">
+      <div className="flex items-center justify-between gap-3 bg-violet-900 px-5 py-4 text-white">
         <div className="flex items-center gap-3">
           <span className="grid h-11 w-11 place-items-center rounded-full bg-white/15 text-lg font-bold">
             {doctor ? doctor.name.replace('ডা. ', '').slice(0, 1) : <Stethoscope size={20} />}
           </span>
           <div>
             <p className="font-bold leading-tight">{doctor ? doctor.name : language === 'bn' ? 'সাপোর্ট টিম' : 'Support team'}</p>
-            <p className="flex items-center gap-1.5 text-xs text-green-200">
-              <span className={`h-2 w-2 rounded-full ${doctor?.isOnline ? 'bg-green-400' : 'bg-zinc-400'}`} />
+            <p className="flex items-center gap-1.5 text-xs text-violet-200">
+              <span className={`h-2 w-2 rounded-full ${doctor?.isOnline ? 'bg-pink-400' : 'bg-zinc-400'}`} />
               {doctor
                 ? `${doctor.isOnline ? (language === 'bn' ? 'অনলাইন' : 'Online') : language === 'bn' ? 'অফলাইন' : 'Offline'} · ${doctor.specialization}`
                 : language === 'bn' ? 'শীঘ্রই একজন ডাক্তার যুক্ত হবেন' : 'A doctor will join soon'}
@@ -69,7 +69,7 @@ export default function ChatRoom({ consultation, messages, sending, peerTyping, 
         )}
         {messages.map((message) =>
           message.system ? (
-            <p key={message._id} className="mx-auto w-fit max-w-[85%] rounded-full bg-green-100 px-4 py-1.5 text-center text-xs font-medium text-green-800">
+            <p key={message._id} className="mx-auto w-fit max-w-[85%] rounded-full bg-violet-100 px-4 py-1.5 text-center text-xs font-medium text-violet-800">
               {message.text}
             </p>
           ) : (
@@ -107,7 +107,7 @@ export default function ChatRoom({ consultation, messages, sending, peerTyping, 
           <button
             type="submit"
             disabled={sending || closed || (!text.trim() && !file)}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-zinc-900 transition hover:bg-secondary disabled:opacity-50"
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-white transition hover:bg-secondary disabled:opacity-50"
             aria-label={language === 'bn' ? 'পাঠান' : 'Send'}
           >
             <Send size={19} />
@@ -123,9 +123,9 @@ function MessageBubble({ message, mine }) {
     <div className={`flex ${mine ? 'justify-end' : 'justify-start'}`}>
       <div className={`max-w-[78%] ${mine ? 'items-end' : 'items-start'}`}>
         {!mine && message.senderName && (
-          <p className="mb-1 ml-1 text-[11px] font-bold text-green-800">{message.senderName}</p>
+          <p className="mb-1 ml-1 text-[11px] font-bold text-violet-800">{message.senderName}</p>
         )}
-        <div className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm ${mine ? 'rounded-br-sm bg-green-700 text-white' : 'rounded-bl-sm bg-white text-zinc-800'}`}>
+        <div className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm ${mine ? 'rounded-br-sm bg-violet-700 text-white' : 'rounded-bl-sm bg-white text-zinc-800'}`}>
           {message.attachment?.url && (
             message.attachment.type === 'video' ? (
               <video src={message.attachment.url} controls className="mb-1.5 max-h-60 rounded-lg" />

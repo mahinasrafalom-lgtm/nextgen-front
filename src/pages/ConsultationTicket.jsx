@@ -35,7 +35,7 @@ export default function ConsultationTicket() {
   const inChat = entered || consultation.status !== 'pending';
 
   return (
-    <main className="bg-[#f6f8f6] pb-16">
+    <main className="bg-[#fbfaff] pb-16">
       <div className="page-container pt-6">
         <Link to="/consultation" className="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-500 hover:text-zinc-800">
           <ArrowLeft size={16} /> {language === 'bn' ? 'আমার পরামর্শসমূহ' : 'My consultations'}

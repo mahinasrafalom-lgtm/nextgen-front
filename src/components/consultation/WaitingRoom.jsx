@@ -9,15 +9,15 @@ export default function WaitingRoom({ consultation, queuePosition, onEnterChat }
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <div className="overflow-hidden rounded-3xl border border-green-100 bg-gradient-to-b from-green-50 to-white p-8 text-center shadow-card">
-        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-green-600 text-white shadow-lg">
+      <div className="overflow-hidden rounded-3xl border border-violet-100 bg-gradient-to-b from-violet-50 to-white p-8 text-center shadow-card">
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-violet-600 text-white shadow-lg">
           <CheckCircle2 size={34} />
         </span>
-        <h2 className="mt-4 text-2xl font-bold text-green-900">
+        <h2 className="mt-4 text-2xl font-bold text-violet-900">
           {language === 'bn' ? 'আবেদন সফলভাবে জমা হয়েছে' : 'Application submitted successfully'}
         </h2>
         <p className="mt-1 text-sm text-zinc-500">{language === 'bn' ? 'আপনার টিকেট নম্বর' : 'Your ticket number'}</p>
-        <div className="mt-3 inline-flex items-center gap-2 rounded-xl border border-green-200 bg-white px-4 py-2 font-mono text-lg font-bold tracking-wide text-green-800">
+        <div className="mt-3 inline-flex items-center gap-2 rounded-xl border border-violet-200 bg-white px-4 py-2 font-mono text-lg font-bold tracking-wide text-violet-800">
           <Ticket size={18} /> {consultation.ticketNumber}
         </div>
         <p className="mt-4 text-zinc-600">

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Bird, Cat, Dog, Fish, Info, Loader2, PawPrint, Upload, X } from 'lucide-react';
+import { Beef, Bird, Egg, Info, Loader2, PawPrint, Sprout, Upload, X } from 'lucide-react';
 import api from '../api/client.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
-import { PET_AGES, PET_TYPES } from '../config/taxonomy.js';
+import { CONSULTATION_ANIMALS, PET_AGES } from '../config/taxonomy.js';
 import { site } from '../config/site.js';
 import Stepper from '../components/consultation/Stepper.jsx';
 
-const petIcons = { cat: Cat, dog: Dog, bird: Bird, fish: Fish };
+const petIcons = { cow: Beef, goat: Sprout, duck: Bird, chicken: Egg };
 const MAX_SIZE = 20 * 1024 * 1024;
 
 export default function ConsultationApply() {
@@ -15,7 +15,7 @@ export default function ConsultationApply() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [form, setForm] = useState({
-    petType: PET_TYPES.some((p) => p.value === params.get('petType')) ? params.get('petType') : 'dog',
+    petType: CONSULTATION_ANIMALS.some((p) => p.value === params.get('petType')) ? params.get('petType') : 'cow',
     petName: '',
     petAge: '1-2y',
     breed: '',
@@ -56,10 +56,10 @@ export default function ConsultationApply() {
   const label = (bn, en) => (language === 'bn' ? bn : en);
 
   return (
-    <main className="bg-[#f6f8f6] pb-16">
-      <section className="bg-green-900 py-8 text-white">
+    <main className="bg-[#fbfaff] pb-16">
+      <section className="consult-apply-top py-8 text-white">
         <div className="page-container">
-          <p className="flex items-center justify-center gap-2 text-center text-sm font-bold text-green-200">
+          <p className="flex items-center justify-center gap-2 text-center text-sm font-bold text-violet-100">
             <PawPrint size={16} /> {label('বিনামূল্যে পশু চিকিৎসা পরামর্শ', 'Free veterinary consultation')}
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function ConsultationApply() {
           {/* Pet type */}
           <Panel icon={PawPrint} title={label('পোষা প্রাণীর ধরন', 'Pet type')}>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {PET_TYPES.map((pet) => {
+              {CONSULTATION_ANIMALS.map((pet) => {
                 const Icon = petIcons[pet.value];
                 const selected = form.petType === pet.value;
                 return (
@@ -80,9 +80,9 @@ export default function ConsultationApply() {
                     type="button"
                     key={pet.value}
                     onClick={() => set('petType', pet.value)}
-                    className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 transition ${selected ? 'border-primary bg-yellow-50' : 'border-zinc-200 hover:border-zinc-300'}`}
+                    className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 transition ${selected ? 'border-violet-500 bg-violet-50' : 'border-zinc-200 hover:border-violet-200'}`}
                   >
-                    <Icon size={28} className={selected ? 'text-primary' : 'text-zinc-500'} />
+                    <Icon size={28} className={selected ? 'text-violet-600' : 'text-zinc-500'} />
                     <span className={`text-sm font-bold ${selected ? 'text-zinc-900' : 'text-zinc-600'}`}>{language === 'bn' ? pet.bn : pet.en}</span>
                   </button>
                 );
@@ -147,10 +147,10 @@ export default function ConsultationApply() {
 
           {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">{error}</p>}
 
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <div className="rounded-2xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-900">
             <Info size={15} className="mr-1 inline" />
             {label(
-              `এই সেবাটি সম্পূর্ণ বিনামূল্যে। আবেদন করলে আমাদের ডাক্তার ${site.responseWindow} ঘণ্টার মধ্যে চ্যাটে যুক্ত দেবেন। জরুরি ক্ষেত্রে নিকটস্থ ভেটে যান।`,
+              `এই সেবাটি সম্পূর্ণ বিনামূল্যে। আবেদন পাওয়ার পর সাপোর্ট টিম যাচাই করে ${site.responseWindow} ঘণ্টার মধ্যে ডাক্তারকে চ্যাটে যুক্ত করবেন। জরুরি ক্ষেত্রে নিকটস্থ ভেটে যান।`,
               `This service is completely free. After you apply, a doctor joins the chat within ${site.responseWindow} hours. In an emergency, visit the nearest vet.`
             )}
           </div>
@@ -165,12 +165,12 @@ export default function ConsultationApply() {
   );
 }
 
-const inputClass = 'w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-yellow-100';
+const inputClass = 'w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100';
 
 function Panel({ icon: Icon, title, children }) {
   return (
     <section className="rounded-2xl border border-zinc-100 bg-white p-5 shadow-card sm:p-6">
-      <h3 className="mb-4 flex items-center gap-2 font-bold text-zinc-900"><Icon size={18} className="text-primary" /> {title}</h3>
+      <h3 className="mb-4 flex items-center gap-2 font-bold text-zinc-900"><Icon size={18} className="text-violet-600" /> {title}</h3>
       {children}
     </section>
   );

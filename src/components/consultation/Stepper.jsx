@@ -21,7 +21,7 @@ export default function Stepper({ current = 1 }) {
             <div className="flex items-center gap-2">
               <span
                 className={`grid h-9 w-9 shrink-0 place-items-center rounded-full text-sm font-bold transition ${
-                  done ? 'bg-green-600 text-white' : active ? 'bg-primary text-zinc-900 ring-4 ring-yellow-100' : 'bg-zinc-200 text-zinc-500'
+                  done ? 'bg-violet-600 text-white' : active ? 'bg-primary text-white ring-4 ring-violet-100' : 'bg-zinc-200 text-zinc-500'
                 }`}
               >
                 {done ? <Check size={18} /> : stepNumber}
@@ -31,7 +31,7 @@ export default function Stepper({ current = 1 }) {
               </span>
             </div>
             {index < steps.length - 1 && (
-              <span className={`mx-3 h-0.5 flex-1 rounded-full ${done ? 'bg-green-500' : 'bg-zinc-200'}`} />
+              <span className={`mx-3 h-0.5 flex-1 rounded-full ${done ? 'bg-violet-500' : 'bg-zinc-200'}`} />
             )}
           </li>
         );

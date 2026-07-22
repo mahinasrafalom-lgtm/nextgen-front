@@ -10,12 +10,20 @@ export const PET_TYPES = [
 
 export const PRODUCT_CATEGORIES = [
   { value: 'food', bn: 'খাবার', en: 'Food' },
-  { value: 'treats', bn: 'ট্রিট', en: 'Treats' },
-  { value: 'toys', bn: 'খেলনা', en: 'Toys' },
   { value: 'medicine', bn: 'মেডিসিন', en: 'Medicine' },
-  { value: 'grooming', bn: 'গ্রুমিং', en: 'Grooming' },
+  { value: 'toys', bn: 'খেলনা', en: 'Toys' },
+  { value: 'supplements', bn: 'সাপ্লিমেন্ট', en: 'Supplements' },
   { value: 'accessories', bn: 'এক্সেসরিজ', en: 'Accessories' },
+  { value: 'treats', bn: 'ট্রিট', en: 'Treats' },
+  { value: 'grooming', bn: 'গ্রুমিং', en: 'Grooming' },
   { value: 'litter', bn: 'লিটার', en: 'Litter' }
+];
+
+export const CONSULTATION_ANIMALS = [
+  { value: 'cow', bn: 'গরু', en: 'Cow' },
+  { value: 'goat', bn: 'ছাগল', en: 'Goat' },
+  { value: 'duck', bn: 'হাঁস', en: 'Duck' },
+  { value: 'chicken', bn: 'মুরগি', en: 'Chicken' }
 ];
 
 export const PET_AGES = [
@@ -29,6 +37,7 @@ export const PET_AGES = [
 const findLabel = (list, value, language) => list.find((item) => item.value === value)?.[language] ?? value ?? '';
 
 export const petLabel = (value, language = 'bn') => findLabel(PET_TYPES, value, language);
+export const consultationAnimalLabel = (value, language = 'bn') => findLabel(CONSULTATION_ANIMALS, value, language);
 export const categoryLabel = (value, language = 'bn') => findLabel(PRODUCT_CATEGORIES, value, language);
 export const ageLabel = (value, language = 'bn') => findLabel(PET_AGES, value, language);
 export const genderLabel = (value, language = 'bn') =>

@@ -3,9 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      colors: { primary: '#e6a900', secondary: '#ffc400', accent: '#252525' },
+      colors: { primary: '#6d4cf4', secondary: '#f579ad', accent: '#272044' },
       fontFamily: { bangla: ['"Hind Siliguri"', 'sans-serif'] },
-      boxShadow: { card: '0 6px 20px rgba(24, 63, 31, 0.08)' }
+      boxShadow: { card: '0 8px 24px rgba(91, 66, 168, 0.1)' }
     }
   },
   plugins: []
